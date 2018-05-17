@@ -1,0 +1,8 @@
+{
+	"gemName": "channelengine_channel_api_client_ruby",
+	"gemSummary": "ChannelEngine Channel API Client for ruby",
+	"gemAuthor": "ChannelEngine",
+	"gemAuthorEmail": "support@channelengine.com",
+	"gemHomepage": "https://www.channelengine.com",
+	"moduleName": "ChannelEngineChannelApiClient"
+}
