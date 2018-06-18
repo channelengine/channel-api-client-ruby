@@ -15,8 +15,10 @@ require 'date'
 module ChannelEngineChannelApiClient
 
   class ChannelOrderLineRequest
+    # The unique order reference used by the channel
     attr_accessor :channel_product_no
 
+    # The number of items of the product
     attr_accessor :quantity
 
     # The number of items for which cancellation was requested by the customer.  Some channels allow a customer to cancel an order until it has been shipped.  When an order has already been acknowledged in ChannelEngine, it can only be cancelled by creating a cancellation.  Use this field to check whether it is still possible to cancel the order. If this is the case, submit a cancellation to ChannelEngine

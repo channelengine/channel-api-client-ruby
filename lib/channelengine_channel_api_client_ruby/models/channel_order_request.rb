@@ -21,8 +21,10 @@ module ChannelEngineChannelApiClient
     # The order lines
     attr_accessor :lines
 
+    # The customer's telephone number
     attr_accessor :phone
 
+    # The customer's email
     attr_accessor :email
 
     # Optional. A company's chamber of commerce number
@@ -31,21 +33,28 @@ module ChannelEngineChannelApiClient
     # Optional. A company's VAT number
     attr_accessor :vat_no
 
+    # The payment method used on the order
     attr_accessor :payment_method
 
     # The shipping fee including VAT  (in the shop's base currency calculated using the exchange rate at the time of ordering).
     attr_accessor :shipping_costs_incl_vat
 
+    # The currency code for the amounts of the order
     attr_accessor :currency_code
 
+    # The date the order was done
     attr_accessor :order_date
 
+    # The unique customer reference used by the channel
     attr_accessor :channel_customer_no
 
+    # The billing or invoice address
     attr_accessor :billing_address
 
+    # The shipping address
     attr_accessor :shipping_address
 
+    # Extra data on the order
     attr_accessor :extra_data
 
 

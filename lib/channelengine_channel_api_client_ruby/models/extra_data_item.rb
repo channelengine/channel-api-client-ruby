@@ -15,12 +15,16 @@ require 'date'
 module ChannelEngineChannelApiClient
 
   class ExtraDataItem
+    # Name of the extra data field
     attr_accessor :key
 
+    # Value of the extra data field
     attr_accessor :value
 
+    # Type of the extra data field
     attr_accessor :type
 
+    # Add this field to the export of the product feed to the channel
     attr_accessor :is_public
 
     class EnumAttributeValidator

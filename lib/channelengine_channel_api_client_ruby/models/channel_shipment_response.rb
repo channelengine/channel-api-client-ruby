@@ -15,14 +15,18 @@ require 'date'
 module ChannelEngineChannelApiClient
 
   class ChannelShipmentResponse
+    # The unique order reference used by the Channel
     attr_accessor :channel_order_no
 
     attr_accessor :lines
 
+    # The unique shipping reference used by the Shipping carrier (track&amp;trace number)
     attr_accessor :track_trace_no
 
+    # A link to a page of the carrier where the customer can track the shipping of her package.
     attr_accessor :track_trace_url
 
+    # Shipment method (carrier)
     attr_accessor :method
 
 

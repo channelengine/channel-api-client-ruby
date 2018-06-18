@@ -15,22 +15,31 @@ require 'date'
 module ChannelEngineChannelApiClient
 
   class Address
+    # Optional. The customer's gender
     attr_accessor :gender
 
+    # Optional. Company addressed too.
     attr_accessor :company_name
 
+    # The first name of the customer
     attr_accessor :first_name
 
+    # The last name of the customer (includes the surname prefix [tussenvoegsel] like 'de', 'van', 'du')
     attr_accessor :last_name
 
+    # The name of the street (without house number information)
     attr_accessor :street_name
 
+    # The house number
     attr_accessor :house_nr
 
+    # Optional. Addition to the house number  If the address is: Groenhazengracht 2c, the address will be:  StreetName: Groenhazengracht  HouseNo: 2  HouseNrAddition: c
     attr_accessor :house_nr_addition
 
+    # The zip or postal code
     attr_accessor :zip_code
 
+    # The name of the city
     attr_accessor :city
 
     # Optional. State/province/region

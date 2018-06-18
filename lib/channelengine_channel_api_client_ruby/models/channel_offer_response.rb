@@ -15,6 +15,7 @@ require 'date'
 module ChannelEngineChannelApiClient
 
   class ChannelOfferResponse
+    # The unique product reference used by the Channel
     attr_accessor :channel_product_no
 
     attr_accessor :price

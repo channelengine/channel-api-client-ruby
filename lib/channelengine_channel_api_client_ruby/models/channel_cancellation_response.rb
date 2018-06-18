@@ -15,12 +15,15 @@ require 'date'
 module ChannelEngineChannelApiClient
 
   class ChannelCancellationResponse
+    # The unique order reference used by the Channel
     attr_accessor :channel_order_no
 
     attr_accessor :lines
 
+    # Reason for cancellation (text)
     attr_accessor :reason
 
+    # Reason code for cancellation
     attr_accessor :reason_code
 
     class EnumAttributeValidator

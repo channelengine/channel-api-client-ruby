@@ -15,8 +15,10 @@ require 'date'
 module ChannelEngineChannelApiClient
 
   class ChannelReturnLineRequest
+    # The unique product reference used by the Channel
     attr_accessor :channel_product_no
 
+    # Number of items of the product in this return
     attr_accessor :quantity
 
 

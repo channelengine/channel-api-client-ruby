@@ -15,22 +15,30 @@ require 'date'
 module ChannelEngineChannelApiClient
 
   class ChannelReturnResponse
+    # The unique return reference used by the Channel
     attr_accessor :channel_return_no
 
+    # The unique order reference used by the Channel
     attr_accessor :channel_order_no
 
     attr_accessor :lines
 
+    # The unique return reference used by ChannelEngine
     attr_accessor :id
 
+    # The reason code of the return
     attr_accessor :reason
 
+    # Optional. Comment of customer on the (reason of) the return
     attr_accessor :customer_comment
 
+    # Optional. Comment of merchant on the return.
     attr_accessor :merchant_comment
 
+    # Refund amount incl. VAT
     attr_accessor :refund_incl_vat
 
+    # Refund amount excl. VAT
     attr_accessor :refund_excl_vat
 
     class EnumAttributeValidator

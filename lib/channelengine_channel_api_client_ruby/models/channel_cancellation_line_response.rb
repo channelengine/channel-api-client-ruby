@@ -15,8 +15,10 @@ require 'date'
 module ChannelEngineChannelApiClient
 
   class ChannelCancellationLineResponse
+    # The unique product reference used by the Channel
     attr_accessor :channel_product_no
 
+    # Quantity of the product to cancel
     attr_accessor :quantity
 
 
