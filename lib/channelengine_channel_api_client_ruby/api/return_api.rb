@@ -52,9 +52,9 @@ module ChannelEngineChannelApiClient
       # header parameters
       header_params = {}
       # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json', 'text/json'])
+      header_params['Accept'] = @api_client.select_header_accept(['text/plain', 'application/json', 'text/json'])
       # HTTP header 'Content-Type'
-      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json', 'text/json', 'application/x-www-form-urlencoded'])
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json-patch+json', 'application/json', 'text/json', 'application/*+json'])
 
       # form parameters
       form_params = {}
@@ -77,38 +77,34 @@ module ChannelEngineChannelApiClient
 
     # Get Returns
     # Get all returns created by the merchant. This call is supposed  to be used by channels. Merchants should use the 'GET /v2/returns/merchant'  call.
-    # @param created_since 
     # @param [Hash] opts the optional parameters
+    # @option opts [DateTime] :created_since 
     # @return [CollectionOfChannelReturnResponse]
-    def return_get_declared_by_merchant(created_since, opts = {})
-      data, _status_code, _headers = return_get_declared_by_merchant_with_http_info(created_since, opts)
+    def return_get_declared_by_merchant(opts = {})
+      data, _status_code, _headers = return_get_declared_by_merchant_with_http_info(opts)
       return data
     end
 
     # Get Returns
     # Get all returns created by the merchant. This call is supposed  to be used by channels. Merchants should use the &#39;GET /v2/returns/merchant&#39;  call.
-    # @param created_since 
     # @param [Hash] opts the optional parameters
+    # @option opts [DateTime] :created_since 
     # @return [Array<(CollectionOfChannelReturnResponse, Fixnum, Hash)>] CollectionOfChannelReturnResponse data, response status code and response headers
-    def return_get_declared_by_merchant_with_http_info(created_since, opts = {})
+    def return_get_declared_by_merchant_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: ReturnApi.return_get_declared_by_merchant ..."
-      end
-      # verify the required parameter 'created_since' is set
-      if @api_client.config.client_side_validation && created_since.nil?
-        fail ArgumentError, "Missing the required parameter 'created_since' when calling ReturnApi.return_get_declared_by_merchant"
       end
       # resource path
       local_var_path = "/v2/returns/channel"
 
       # query parameters
       query_params = {}
-      query_params[:'createdSince'] = created_since
+      query_params[:'createdSince'] = opts[:'created_since'] if !opts[:'created_since'].nil?
 
       # header parameters
       header_params = {}
       # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json', 'text/json'])
+      header_params['Accept'] = @api_client.select_header_accept(['text/plain', 'application/json', 'text/json'])
 
       # form parameters
       form_params = {}

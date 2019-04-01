@@ -20,6 +20,12 @@ module ChannelEngineChannelApiClient
 
     attr_accessor :lines
 
+    # The date at which the cancellation was created in ChannelEngine
+    attr_accessor :created_at
+
+    # The date at which the cancellation was last modified in ChannelEngine
+    attr_accessor :updated_at
+
     # Reason for cancellation (text)
     attr_accessor :reason
 
@@ -53,6 +59,8 @@ module ChannelEngineChannelApiClient
       {
         :'channel_order_no' => :'ChannelOrderNo',
         :'lines' => :'Lines',
+        :'created_at' => :'CreatedAt',
+        :'updated_at' => :'UpdatedAt',
         :'reason' => :'Reason',
         :'reason_code' => :'ReasonCode'
       }
@@ -63,6 +71,8 @@ module ChannelEngineChannelApiClient
       {
         :'channel_order_no' => :'String',
         :'lines' => :'Array<ChannelCancellationLineResponse>',
+        :'created_at' => :'DateTime',
+        :'updated_at' => :'DateTime',
         :'reason' => :'String',
         :'reason_code' => :'String'
       }
@@ -84,6 +94,14 @@ module ChannelEngineChannelApiClient
         if (value = attributes[:'Lines']).is_a?(Array)
           self.lines = value
         end
+      end
+
+      if attributes.has_key?(:'CreatedAt')
+        self.created_at = attributes[:'CreatedAt']
+      end
+
+      if attributes.has_key?(:'UpdatedAt')
+        self.updated_at = attributes[:'UpdatedAt']
       end
 
       if attributes.has_key?(:'Reason')
@@ -138,6 +156,8 @@ module ChannelEngineChannelApiClient
       self.class == o.class &&
           channel_order_no == o.channel_order_no &&
           lines == o.lines &&
+          created_at == o.created_at &&
+          updated_at == o.updated_at &&
           reason == o.reason &&
           reason_code == o.reason_code
     end
@@ -151,7 +171,7 @@ module ChannelEngineChannelApiClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [channel_order_no, lines, reason, reason_code].hash
+      [channel_order_no, lines, created_at, updated_at, reason, reason_code].hash
     end
 
     # Builds the object from hash

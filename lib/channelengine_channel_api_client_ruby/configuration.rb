@@ -129,7 +129,7 @@ module ChannelEngineChannelApiClient
 
     def initialize
       @scheme = 'https'
-      @host = 'demo.channelengine.net'
+      @host = ''
       @base_path = '/api'
       @api_key = {}
       @api_key_prefix = {}

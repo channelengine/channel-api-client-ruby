@@ -22,38 +22,34 @@ module ChannelEngineChannelApiClient
 
     # Get Shipments
     # Gets all shipments created since the supplied date.
-    # @param created_since 
     # @param [Hash] opts the optional parameters
+    # @option opts [DateTime] :created_since 
     # @return [CollectionOfChannelShipmentResponse]
-    def shipment_index(created_since, opts = {})
-      data, _status_code, _headers = shipment_index_with_http_info(created_since, opts)
+    def shipment_index(opts = {})
+      data, _status_code, _headers = shipment_index_with_http_info(opts)
       return data
     end
 
     # Get Shipments
     # Gets all shipments created since the supplied date.
-    # @param created_since 
     # @param [Hash] opts the optional parameters
+    # @option opts [DateTime] :created_since 
     # @return [Array<(CollectionOfChannelShipmentResponse, Fixnum, Hash)>] CollectionOfChannelShipmentResponse data, response status code and response headers
-    def shipment_index_with_http_info(created_since, opts = {})
+    def shipment_index_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: ShipmentApi.shipment_index ..."
-      end
-      # verify the required parameter 'created_since' is set
-      if @api_client.config.client_side_validation && created_since.nil?
-        fail ArgumentError, "Missing the required parameter 'created_since' when calling ShipmentApi.shipment_index"
       end
       # resource path
       local_var_path = "/v2/shipments"
 
       # query parameters
       query_params = {}
-      query_params[:'createdSince'] = created_since
+      query_params[:'createdSince'] = opts[:'created_since'] if !opts[:'created_since'].nil?
 
       # header parameters
       header_params = {}
       # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json', 'text/json'])
+      header_params['Accept'] = @api_client.select_header_accept(['text/plain', 'application/json', 'text/json'])
 
       # form parameters
       form_params = {}

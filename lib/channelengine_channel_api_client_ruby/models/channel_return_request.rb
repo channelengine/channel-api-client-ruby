@@ -182,7 +182,7 @@ module ChannelEngineChannelApiClient
       return false if @channel_order_no.nil?
       return false if @channel_reference.nil?
       return false if @lines.nil?
-      reason_validator = EnumAttributeValidator.new('String', ["PRODUCT_DEFECT", "PRODUCT_UNSATISFACTORY", "WRONG_PRODUCT", "TOO_MANY_PRODUCTS", "REFUSED", "REFUSED_DAMAGED", "WRONG_ADDRESS", "NOT_COLLECTED", "OTHER"])
+      reason_validator = EnumAttributeValidator.new('String', ["PRODUCT_DEFECT", "PRODUCT_UNSATISFACTORY", "WRONG_PRODUCT", "TOO_MANY_PRODUCTS", "REFUSED", "REFUSED_DAMAGED", "WRONG_ADDRESS", "NOT_COLLECTED", "WRONG_SIZE", "OTHER"])
       return false unless reason_validator.valid?(@reason)
       return false if !@customer_comment.nil? && @customer_comment.to_s.length > 4001
       return false if !@customer_comment.nil? && @customer_comment.to_s.length < 0
@@ -194,7 +194,7 @@ module ChannelEngineChannelApiClient
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reason Object to be assigned
     def reason=(reason)
-      validator = EnumAttributeValidator.new('String', ["PRODUCT_DEFECT", "PRODUCT_UNSATISFACTORY", "WRONG_PRODUCT", "TOO_MANY_PRODUCTS", "REFUSED", "REFUSED_DAMAGED", "WRONG_ADDRESS", "NOT_COLLECTED", "OTHER"])
+      validator = EnumAttributeValidator.new('String', ["PRODUCT_DEFECT", "PRODUCT_UNSATISFACTORY", "WRONG_PRODUCT", "TOO_MANY_PRODUCTS", "REFUSED", "REFUSED_DAMAGED", "WRONG_ADDRESS", "NOT_COLLECTED", "WRONG_SIZE", "OTHER"])
       unless validator.valid?(reason)
         fail ArgumentError, "invalid value for 'reason', must be one of #{validator.allowable_values}."
       end

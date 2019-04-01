@@ -27,13 +27,13 @@ module ChannelEngineChannelApiClient
     # The last name of the customer (includes the surname prefix [tussenvoegsel] like 'de', 'van', 'du')
     attr_accessor :last_name
 
-    # The name of the street (without house number information)
+    # The name of the street (without house number information)  This field might be empty if address validation is disabled in ChannelEngine
     attr_accessor :street_name
 
-    # The house number
+    # The house number  This field might be empty if address validation is disabled in ChannelEngine
     attr_accessor :house_nr
 
-    # Optional. Addition to the house number  If the address is: Groenhazengracht 2c, the address will be:  StreetName: Groenhazengracht  HouseNo: 2  HouseNrAddition: c
+    # Optional. Addition to the house number  If the address is: Groenhazengracht 2c, the address will be:  StreetName: Groenhazengracht  HouseNo: 2  HouseNrAddition: c  This field might be empty if address validation is disabled in ChannelEngine
     attr_accessor :house_nr_addition
 
     # The zip or postal code

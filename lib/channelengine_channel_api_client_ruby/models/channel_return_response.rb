@@ -23,6 +23,12 @@ module ChannelEngineChannelApiClient
 
     attr_accessor :lines
 
+    # The date at which the return was created in ChannelEngine
+    attr_accessor :created_at
+
+    # The date at which the return was last modified in ChannelEngine
+    attr_accessor :updated_at
+
     # The unique return reference used by ChannelEngine
     attr_accessor :id
 
@@ -69,6 +75,8 @@ module ChannelEngineChannelApiClient
         :'channel_return_no' => :'ChannelReturnNo',
         :'channel_order_no' => :'ChannelOrderNo',
         :'lines' => :'Lines',
+        :'created_at' => :'CreatedAt',
+        :'updated_at' => :'UpdatedAt',
         :'id' => :'Id',
         :'reason' => :'Reason',
         :'customer_comment' => :'CustomerComment',
@@ -84,6 +92,8 @@ module ChannelEngineChannelApiClient
         :'channel_return_no' => :'String',
         :'channel_order_no' => :'String',
         :'lines' => :'Array<ChannelReturnLineResponse>',
+        :'created_at' => :'DateTime',
+        :'updated_at' => :'DateTime',
         :'id' => :'Integer',
         :'reason' => :'String',
         :'customer_comment' => :'String',
@@ -113,6 +123,14 @@ module ChannelEngineChannelApiClient
         if (value = attributes[:'Lines']).is_a?(Array)
           self.lines = value
         end
+      end
+
+      if attributes.has_key?(:'CreatedAt')
+        self.created_at = attributes[:'CreatedAt']
+      end
+
+      if attributes.has_key?(:'UpdatedAt')
+        self.updated_at = attributes[:'UpdatedAt']
       end
 
       if attributes.has_key?(:'Id')
@@ -182,7 +200,7 @@ module ChannelEngineChannelApiClient
       return false if @channel_return_no.nil?
       return false if @channel_order_no.nil?
       return false if @lines.nil?
-      reason_validator = EnumAttributeValidator.new('String', ["PRODUCT_DEFECT", "PRODUCT_UNSATISFACTORY", "WRONG_PRODUCT", "TOO_MANY_PRODUCTS", "REFUSED", "REFUSED_DAMAGED", "WRONG_ADDRESS", "NOT_COLLECTED", "OTHER"])
+      reason_validator = EnumAttributeValidator.new('String', ["PRODUCT_DEFECT", "PRODUCT_UNSATISFACTORY", "WRONG_PRODUCT", "TOO_MANY_PRODUCTS", "REFUSED", "REFUSED_DAMAGED", "WRONG_ADDRESS", "NOT_COLLECTED", "WRONG_SIZE", "OTHER"])
       return false unless reason_validator.valid?(@reason)
       return false if !@customer_comment.nil? && @customer_comment.to_s.length > 4001
       return false if !@customer_comment.nil? && @customer_comment.to_s.length < 0
@@ -194,7 +212,7 @@ module ChannelEngineChannelApiClient
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reason Object to be assigned
     def reason=(reason)
-      validator = EnumAttributeValidator.new('String', ["PRODUCT_DEFECT", "PRODUCT_UNSATISFACTORY", "WRONG_PRODUCT", "TOO_MANY_PRODUCTS", "REFUSED", "REFUSED_DAMAGED", "WRONG_ADDRESS", "NOT_COLLECTED", "OTHER"])
+      validator = EnumAttributeValidator.new('String', ["PRODUCT_DEFECT", "PRODUCT_UNSATISFACTORY", "WRONG_PRODUCT", "TOO_MANY_PRODUCTS", "REFUSED", "REFUSED_DAMAGED", "WRONG_ADDRESS", "NOT_COLLECTED", "WRONG_SIZE", "OTHER"])
       unless validator.valid?(reason)
         fail ArgumentError, "invalid value for 'reason', must be one of #{validator.allowable_values}."
       end
@@ -239,6 +257,8 @@ module ChannelEngineChannelApiClient
           channel_return_no == o.channel_return_no &&
           channel_order_no == o.channel_order_no &&
           lines == o.lines &&
+          created_at == o.created_at &&
+          updated_at == o.updated_at &&
           id == o.id &&
           reason == o.reason &&
           customer_comment == o.customer_comment &&
@@ -256,7 +276,7 @@ module ChannelEngineChannelApiClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [channel_return_no, channel_order_no, lines, id, reason, customer_comment, merchant_comment, refund_incl_vat, refund_excl_vat].hash
+      [channel_return_no, channel_order_no, lines, created_at, updated_at, id, reason, customer_comment, merchant_comment, refund_incl_vat, refund_excl_vat].hash
     end
 
     # Builds the object from hash

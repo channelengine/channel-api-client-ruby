@@ -19,6 +19,8 @@ module ChannelEngineChannelApiClient
 
     attr_accessor :status_code
 
+    attr_accessor :log_id
+
     attr_accessor :success
 
     attr_accessor :message
@@ -31,6 +33,7 @@ module ChannelEngineChannelApiClient
       {
         :'content' => :'Content',
         :'status_code' => :'StatusCode',
+        :'log_id' => :'LogId',
         :'success' => :'Success',
         :'message' => :'Message',
         :'validation_errors' => :'ValidationErrors'
@@ -42,6 +45,7 @@ module ChannelEngineChannelApiClient
       {
         :'content' => :'ChannelProductChangesResponse',
         :'status_code' => :'Integer',
+        :'log_id' => :'Integer',
         :'success' => :'BOOLEAN',
         :'message' => :'String',
         :'validation_errors' => :'Hash<String, Array<String>>'
@@ -62,6 +66,10 @@ module ChannelEngineChannelApiClient
 
       if attributes.has_key?(:'StatusCode')
         self.status_code = attributes[:'StatusCode']
+      end
+
+      if attributes.has_key?(:'LogId')
+        self.log_id = attributes[:'LogId']
       end
 
       if attributes.has_key?(:'Success')
@@ -100,6 +108,7 @@ module ChannelEngineChannelApiClient
       self.class == o.class &&
           content == o.content &&
           status_code == o.status_code &&
+          log_id == o.log_id &&
           success == o.success &&
           message == o.message &&
           validation_errors == o.validation_errors
@@ -114,7 +123,7 @@ module ChannelEngineChannelApiClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [content, status_code, success, message, validation_errors].hash
+      [content, status_code, log_id, success, message, validation_errors].hash
     end
 
     # Builds the object from hash

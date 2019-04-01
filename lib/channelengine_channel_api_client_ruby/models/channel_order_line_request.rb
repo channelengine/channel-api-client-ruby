@@ -142,10 +142,6 @@ module ChannelEngineChannelApiClient
         invalid_properties.push("invalid value for 'quantity', quantity cannot be nil.")
       end
 
-      if @cancellation_requested_quantity.nil?
-        invalid_properties.push("invalid value for 'cancellation_requested_quantity', cancellation_requested_quantity cannot be nil.")
-      end
-
       if @unit_price_incl_vat.nil?
         invalid_properties.push("invalid value for 'unit_price_incl_vat', unit_price_incl_vat cannot be nil.")
       end
@@ -160,9 +156,8 @@ module ChannelEngineChannelApiClient
       return false if @channel_product_no.to_s.length > 50
       return false if @channel_product_no.to_s.length < 0
       return false if @quantity.nil?
-      return false if @cancellation_requested_quantity.nil?
       return false if @unit_price_incl_vat.nil?
-      condition_validator = EnumAttributeValidator.new('String', ["NEW", "NEW_REFURBISHED", "USED_AS_NEW", "USED_GOOD", "USED_REASONABLE", "USED_MEDIOCRE", "UNKNOWN"])
+      condition_validator = EnumAttributeValidator.new('String', ["NEW", "NEW_REFURBISHED", "USED_AS_NEW", "USED_GOOD", "USED_REASONABLE", "USED_MEDIOCRE", "UNKNOWN", "USED_VERY_GOOD"])
       return false unless condition_validator.valid?(@condition)
       return true
     end
@@ -188,7 +183,7 @@ module ChannelEngineChannelApiClient
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] condition Object to be assigned
     def condition=(condition)
-      validator = EnumAttributeValidator.new('String', ["NEW", "NEW_REFURBISHED", "USED_AS_NEW", "USED_GOOD", "USED_REASONABLE", "USED_MEDIOCRE", "UNKNOWN"])
+      validator = EnumAttributeValidator.new('String', ["NEW", "NEW_REFURBISHED", "USED_AS_NEW", "USED_GOOD", "USED_REASONABLE", "USED_MEDIOCRE", "UNKNOWN", "USED_VERY_GOOD"])
       unless validator.valid?(condition)
         fail ArgumentError, "invalid value for 'condition', must be one of #{validator.allowable_values}."
       end

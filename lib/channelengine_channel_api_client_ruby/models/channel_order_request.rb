@@ -244,6 +244,10 @@ module ChannelEngineChannelApiClient
         invalid_properties.push("invalid value for 'currency_code', currency_code cannot be nil.")
       end
 
+      if @currency_code.to_s.length > 3
+        invalid_properties.push("invalid value for 'currency_code', the character length must be smaller than or equal to 3.")
+      end
+
       if @order_date.nil?
         invalid_properties.push("invalid value for 'order_date', order_date cannot be nil.")
       end
@@ -288,6 +292,7 @@ module ChannelEngineChannelApiClient
       return false if @payment_method.to_s.length < 0
       return false if @shipping_costs_incl_vat.nil?
       return false if @currency_code.nil?
+      return false if @currency_code.to_s.length > 3
       return false if @order_date.nil?
       return false if !@channel_customer_no.nil? && @channel_customer_no.to_s.length > 50
       return false if !@channel_customer_no.nil? && @channel_customer_no.to_s.length < 0
@@ -393,6 +398,20 @@ module ChannelEngineChannelApiClient
       end
 
       @payment_method = payment_method
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] currency_code Value to be assigned
+    def currency_code=(currency_code)
+      if currency_code.nil?
+        fail ArgumentError, "currency_code cannot be nil"
+      end
+
+      if currency_code.to_s.length > 3
+        fail ArgumentError, "invalid value for 'currency_code', the character length must be smaller than or equal to 3."
+      end
+
+      @currency_code = currency_code
     end
 
     # Custom attribute writer method with validation

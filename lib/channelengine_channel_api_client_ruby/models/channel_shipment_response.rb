@@ -20,13 +20,19 @@ module ChannelEngineChannelApiClient
 
     attr_accessor :lines
 
+    # The date at which the shipment was created in ChannelEngine
+    attr_accessor :created_at
+
+    # The date at which the shipment was last modified in ChannelEngine
+    attr_accessor :updated_at
+
     # The unique shipping reference used by the Shipping carrier (track&amp;trace number)
     attr_accessor :track_trace_no
 
     # A link to a page of the carrier where the customer can track the shipping of her package.
     attr_accessor :track_trace_url
 
-    # Shipment method (carrier)
+    # Shipment method: the carrier used for shipping the package. E.g. DHL, postNL
     attr_accessor :method
 
 
@@ -35,6 +41,8 @@ module ChannelEngineChannelApiClient
       {
         :'channel_order_no' => :'ChannelOrderNo',
         :'lines' => :'Lines',
+        :'created_at' => :'CreatedAt',
+        :'updated_at' => :'UpdatedAt',
         :'track_trace_no' => :'TrackTraceNo',
         :'track_trace_url' => :'TrackTraceUrl',
         :'method' => :'Method'
@@ -46,6 +54,8 @@ module ChannelEngineChannelApiClient
       {
         :'channel_order_no' => :'String',
         :'lines' => :'Array<ChannelShipmentLineResponse>',
+        :'created_at' => :'DateTime',
+        :'updated_at' => :'DateTime',
         :'track_trace_no' => :'String',
         :'track_trace_url' => :'String',
         :'method' => :'String'
@@ -68,6 +78,14 @@ module ChannelEngineChannelApiClient
         if (value = attributes[:'Lines']).is_a?(Array)
           self.lines = value
         end
+      end
+
+      if attributes.has_key?(:'CreatedAt')
+        self.created_at = attributes[:'CreatedAt']
+      end
+
+      if attributes.has_key?(:'UpdatedAt')
+        self.updated_at = attributes[:'UpdatedAt']
       end
 
       if attributes.has_key?(:'TrackTraceNo')
@@ -189,6 +207,8 @@ module ChannelEngineChannelApiClient
       self.class == o.class &&
           channel_order_no == o.channel_order_no &&
           lines == o.lines &&
+          created_at == o.created_at &&
+          updated_at == o.updated_at &&
           track_trace_no == o.track_trace_no &&
           track_trace_url == o.track_trace_url &&
           method == o.method
@@ -203,7 +223,7 @@ module ChannelEngineChannelApiClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [channel_order_no, lines, track_trace_no, track_trace_url, method].hash
+      [channel_order_no, lines, created_at, updated_at, track_trace_no, track_trace_url, method].hash
     end
 
     # Builds the object from hash

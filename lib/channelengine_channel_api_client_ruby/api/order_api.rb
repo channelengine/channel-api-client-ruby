@@ -52,9 +52,9 @@ module ChannelEngineChannelApiClient
       # header parameters
       header_params = {}
       # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json', 'text/json'])
+      header_params['Accept'] = @api_client.select_header_accept(['text/plain', 'application/json', 'text/json'])
       # HTTP header 'Content-Type'
-      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json', 'text/json', 'application/x-www-form-urlencoded'])
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json-patch+json', 'application/json', 'text/json', 'application/*+json'])
 
       # form parameters
       form_params = {}
@@ -79,7 +79,7 @@ module ChannelEngineChannelApiClient
     # Generates the ChannelEngine VAT invoice for this order in PDF
     # @param merchant_order_no The unique order reference as used by the merchant
     # @param [Hash] opts the optional parameters
-    # @option opts [BOOLEAN] :use_customer_culture Generate the invoice in the billing address&#39; country&#39;s language
+    # @option opts [BOOLEAN] :use_customer_culture Generate the invoice in the billing address&#39; country&#39;s language (default to false)
     # @return [File]
     def order_invoice(merchant_order_no, opts = {})
       data, _status_code, _headers = order_invoice_with_http_info(merchant_order_no, opts)
@@ -135,7 +135,7 @@ module ChannelEngineChannelApiClient
     # Generates the ChannelEngine packing slip for this order in PDF
     # @param merchant_order_no The unique order reference as used by the merchant
     # @param [Hash] opts the optional parameters
-    # @option opts [BOOLEAN] :use_customer_culture Generate the invoice in the billing address&#39; country&#39;s language
+    # @option opts [BOOLEAN] :use_customer_culture Generate the invoice in the billing address&#39; country&#39;s language (default to false)
     # @return [File]
     def order_packing_slip(merchant_order_no, opts = {})
       data, _status_code, _headers = order_packing_slip_with_http_info(merchant_order_no, opts)
