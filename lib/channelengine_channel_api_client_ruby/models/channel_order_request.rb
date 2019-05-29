@@ -224,15 +224,11 @@ module ChannelEngineChannelApiClient
         invalid_properties.push("invalid value for 'vat_no', the character length must be great than or equal to 0.")
       end
 
-      if @payment_method.nil?
-        invalid_properties.push("invalid value for 'payment_method', payment_method cannot be nil.")
-      end
-
-      if @payment_method.to_s.length > 50
+      if !@payment_method.nil? && @payment_method.to_s.length > 50
         invalid_properties.push("invalid value for 'payment_method', the character length must be smaller than or equal to 50.")
       end
 
-      if @payment_method.to_s.length < 0
+      if !@payment_method.nil? && @payment_method.to_s.length < 0
         invalid_properties.push("invalid value for 'payment_method', the character length must be great than or equal to 0.")
       end
 
@@ -287,9 +283,8 @@ module ChannelEngineChannelApiClient
       return false if !@company_registration_no.nil? && @company_registration_no.to_s.length < 0
       return false if !@vat_no.nil? && @vat_no.to_s.length > 50
       return false if !@vat_no.nil? && @vat_no.to_s.length < 0
-      return false if @payment_method.nil?
-      return false if @payment_method.to_s.length > 50
-      return false if @payment_method.to_s.length < 0
+      return false if !@payment_method.nil? && @payment_method.to_s.length > 50
+      return false if !@payment_method.nil? && @payment_method.to_s.length < 0
       return false if @shipping_costs_incl_vat.nil?
       return false if @currency_code.nil?
       return false if @currency_code.to_s.length > 3
@@ -385,15 +380,12 @@ module ChannelEngineChannelApiClient
     # Custom attribute writer method with validation
     # @param [Object] payment_method Value to be assigned
     def payment_method=(payment_method)
-      if payment_method.nil?
-        fail ArgumentError, "payment_method cannot be nil"
-      end
 
-      if payment_method.to_s.length > 50
+      if !payment_method.nil? && payment_method.to_s.length > 50
         fail ArgumentError, "invalid value for 'payment_method', the character length must be smaller than or equal to 50."
       end
 
-      if payment_method.to_s.length < 0
+      if !payment_method.nil? && payment_method.to_s.length < 0
         fail ArgumentError, "invalid value for 'payment_method', the character length must be great than or equal to 0."
       end
 
