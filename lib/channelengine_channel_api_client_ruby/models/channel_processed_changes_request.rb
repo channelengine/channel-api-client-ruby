@@ -37,7 +37,7 @@ module ChannelEngineChannelApiClient
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'created' => :'Array<ChannelReferencesRequest>',
+        :'created' => :'Array<ChannelProductReferencesRequest>',
         :'updated' => :'Array<String>',
         :'removed' => :'Array<String>'
       }

@@ -14,27 +14,58 @@ require 'date'
 
 module ChannelEngineChannelApiClient
 
-  class ChannelReferencesRequest
-    # The unique ChannelEngine product ID.
-    attr_accessor :id
+  class ChannelProductExtraDataItemResponse
+    # Name of the extra data field
+    attr_accessor :key
 
-    # The unique product reference used by the Channel
-    attr_accessor :channel_product_no
+    # Value of the extra data field
+    attr_accessor :value
 
+    # Type of the extra data field
+    attr_accessor :type
+
+    # Add this field to the export of the product feed to the channel
+    attr_accessor :is_public
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'Id',
-        :'channel_product_no' => :'ChannelProductNo'
+        :'key' => :'Key',
+        :'value' => :'Value',
+        :'type' => :'Type',
+        :'is_public' => :'IsPublic'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'id' => :'Integer',
-        :'channel_product_no' => :'String'
+        :'key' => :'String',
+        :'value' => :'String',
+        :'type' => :'String',
+        :'is_public' => :'BOOLEAN'
       }
     end
 
@@ -46,12 +77,20 @@ module ChannelEngineChannelApiClient
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
-      if attributes.has_key?(:'Id')
-        self.id = attributes[:'Id']
+      if attributes.has_key?(:'Key')
+        self.key = attributes[:'Key']
       end
 
-      if attributes.has_key?(:'ChannelProductNo')
-        self.channel_product_no = attributes[:'ChannelProductNo']
+      if attributes.has_key?(:'Value')
+        self.value = attributes[:'Value']
+      end
+
+      if attributes.has_key?(:'Type')
+        self.type = attributes[:'Type']
+      end
+
+      if attributes.has_key?(:'IsPublic')
+        self.is_public = attributes[:'IsPublic']
       end
 
     end
@@ -66,7 +105,19 @@ module ChannelEngineChannelApiClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      type_validator = EnumAttributeValidator.new('String', ["TEXT", "NUMBER", "URL", "IMAGEURL"])
+      return false unless type_validator.valid?(@type)
       return true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] type Object to be assigned
+    def type=(type)
+      validator = EnumAttributeValidator.new('String', ["TEXT", "NUMBER", "URL", "IMAGEURL"])
+      unless validator.valid?(type)
+        fail ArgumentError, "invalid value for 'type', must be one of #{validator.allowable_values}."
+      end
+      @type = type
     end
 
     # Checks equality by comparing each attribute.
@@ -74,8 +125,10 @@ module ChannelEngineChannelApiClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          channel_product_no == o.channel_product_no
+          key == o.key &&
+          value == o.value &&
+          type == o.type &&
+          is_public == o.is_public
     end
 
     # @see the `==` method
@@ -87,7 +140,7 @@ module ChannelEngineChannelApiClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, channel_product_no].hash
+      [key, value, type, is_public].hash
     end
 
     # Builds the object from hash

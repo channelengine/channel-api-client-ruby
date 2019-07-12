@@ -24,6 +24,9 @@ module ChannelEngineChannelApiClient
     # A channel can require certain fields to be available. The channel  can provide ChannelEngine with this fields after which the merchants  will be able to fill in this field using custom conditions in ChannelEngine.
     attr_accessor :mapped_fields
 
+    # An optional list of key-value pairs containing  extra data about this product. This data can be  sent to channels or used for filtering products.
+    attr_accessor :extra_data
+
     # The name of the product
     attr_accessor :name
 
@@ -102,9 +105,6 @@ module ChannelEngineChannelApiClient
     # The category to which this product belongs.  Please supply this field in the following format:  'maincategory &gt; category &gt; subcategory'  For example:  'vehicles &gt; bikes &gt; mountainbike'
     attr_accessor :category_trail
 
-    # An optional list of key-value pairs containing  extra data about this product. This data can be  sent to channels or used for filtering products.
-    attr_accessor :extra_data
-
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -133,6 +133,7 @@ module ChannelEngineChannelApiClient
         :'id' => :'Id',
         :'parent_channel_product_no' => :'ParentChannelProductNo',
         :'mapped_fields' => :'MappedFields',
+        :'extra_data' => :'ExtraData',
         :'name' => :'Name',
         :'description' => :'Description',
         :'brand' => :'Brand',
@@ -158,8 +159,7 @@ module ChannelEngineChannelApiClient
         :'extra_image_url7' => :'ExtraImageUrl7',
         :'extra_image_url8' => :'ExtraImageUrl8',
         :'extra_image_url9' => :'ExtraImageUrl9',
-        :'category_trail' => :'CategoryTrail',
-        :'extra_data' => :'ExtraData'
+        :'category_trail' => :'CategoryTrail'
       }
     end
 
@@ -169,6 +169,7 @@ module ChannelEngineChannelApiClient
         :'id' => :'Integer',
         :'parent_channel_product_no' => :'String',
         :'mapped_fields' => :'Hash<String, String>',
+        :'extra_data' => :'Array<ChannelProductExtraDataItemResponse>',
         :'name' => :'String',
         :'description' => :'String',
         :'brand' => :'String',
@@ -194,8 +195,7 @@ module ChannelEngineChannelApiClient
         :'extra_image_url7' => :'String',
         :'extra_image_url8' => :'String',
         :'extra_image_url9' => :'String',
-        :'category_trail' => :'String',
-        :'extra_data' => :'Array<ExtraDataItem>'
+        :'category_trail' => :'String'
       }
     end
 
@@ -218,6 +218,12 @@ module ChannelEngineChannelApiClient
       if attributes.has_key?(:'MappedFields')
         if (value = attributes[:'MappedFields']).is_a?(Hash)
           self.mapped_fields = value
+        end
+      end
+
+      if attributes.has_key?(:'ExtraData')
+        if (value = attributes[:'ExtraData']).is_a?(Array)
+          self.extra_data = value
         end
       end
 
@@ -325,12 +331,6 @@ module ChannelEngineChannelApiClient
         self.category_trail = attributes[:'CategoryTrail']
       end
 
-      if attributes.has_key?(:'ExtraData')
-        if (value = attributes[:'ExtraData']).is_a?(Array)
-          self.extra_data = value
-        end
-      end
-
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -366,6 +366,7 @@ module ChannelEngineChannelApiClient
           id == o.id &&
           parent_channel_product_no == o.parent_channel_product_no &&
           mapped_fields == o.mapped_fields &&
+          extra_data == o.extra_data &&
           name == o.name &&
           description == o.description &&
           brand == o.brand &&
@@ -391,8 +392,7 @@ module ChannelEngineChannelApiClient
           extra_image_url7 == o.extra_image_url7 &&
           extra_image_url8 == o.extra_image_url8 &&
           extra_image_url9 == o.extra_image_url9 &&
-          category_trail == o.category_trail &&
-          extra_data == o.extra_data
+          category_trail == o.category_trail
     end
 
     # @see the `==` method
@@ -404,7 +404,7 @@ module ChannelEngineChannelApiClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, parent_channel_product_no, mapped_fields, name, description, brand, size, color, ean, manufacturer_product_number, stock, price, msrp, purchase_price, vat_rate_type, shipping_cost, shipping_time, url, image_url, extra_image_url1, extra_image_url2, extra_image_url3, extra_image_url4, extra_image_url5, extra_image_url6, extra_image_url7, extra_image_url8, extra_image_url9, category_trail, extra_data].hash
+      [id, parent_channel_product_no, mapped_fields, extra_data, name, description, brand, size, color, ean, manufacturer_product_number, stock, price, msrp, purchase_price, vat_rate_type, shipping_cost, shipping_time, url, image_url, extra_image_url1, extra_image_url2, extra_image_url3, extra_image_url4, extra_image_url5, extra_image_url6, extra_image_url7, extra_image_url8, extra_image_url9, category_trail].hash
     end
 
     # Builds the object from hash

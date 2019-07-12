@@ -17,8 +17,8 @@ require 'channelengine_channel_api_client_ruby/version'
 require 'channelengine_channel_api_client_ruby/configuration'
 
 # Models
-require 'channelengine_channel_api_client_ruby/models/address'
 require 'channelengine_channel_api_client_ruby/models/api_response'
+require 'channelengine_channel_api_client_ruby/models/channel_address_request'
 require 'channelengine_channel_api_client_ruby/models/channel_cancellation_line_response'
 require 'channelengine_channel_api_client_ruby/models/channel_cancellation_response'
 require 'channelengine_channel_api_client_ruby/models/channel_offer_response'
@@ -26,8 +26,9 @@ require 'channelengine_channel_api_client_ruby/models/channel_order_line_request
 require 'channelengine_channel_api_client_ruby/models/channel_order_request'
 require 'channelengine_channel_api_client_ruby/models/channel_processed_changes_request'
 require 'channelengine_channel_api_client_ruby/models/channel_product_changes_response'
+require 'channelengine_channel_api_client_ruby/models/channel_product_extra_data_item_response'
+require 'channelengine_channel_api_client_ruby/models/channel_product_references_request'
 require 'channelengine_channel_api_client_ruby/models/channel_product_response'
-require 'channelengine_channel_api_client_ruby/models/channel_references_request'
 require 'channelengine_channel_api_client_ruby/models/channel_return_line_request'
 require 'channelengine_channel_api_client_ruby/models/channel_return_line_response'
 require 'channelengine_channel_api_client_ruby/models/channel_return_request'
@@ -38,7 +39,6 @@ require 'channelengine_channel_api_client_ruby/models/collection_of_channel_canc
 require 'channelengine_channel_api_client_ruby/models/collection_of_channel_offer_response'
 require 'channelengine_channel_api_client_ruby/models/collection_of_channel_return_response'
 require 'channelengine_channel_api_client_ruby/models/collection_of_channel_shipment_response'
-require 'channelengine_channel_api_client_ruby/models/extra_data_item'
 require 'channelengine_channel_api_client_ruby/models/single_of_channel_product_changes_response'
 
 # APIs

@@ -14,7 +14,7 @@ require 'date'
 
 module ChannelEngineChannelApiClient
 
-  class Address
+  class ChannelAddressRequest
     # Optional. The customer's gender
     attr_accessor :gender
 

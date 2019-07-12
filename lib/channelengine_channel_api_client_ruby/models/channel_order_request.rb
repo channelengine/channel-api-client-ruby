@@ -15,8 +15,17 @@ require 'date'
 module ChannelEngineChannelApiClient
 
   class ChannelOrderRequest
+    # The billing or invoice address
+    attr_accessor :billing_address
+
+    # The shipping address
+    attr_accessor :shipping_address
+
     # The unique order reference used by the Channel
     attr_accessor :channel_order_no
+
+    # Optional. Is a business order (default value is false).  If not provided the VAT Number will be checked. If a VAT Number is found, IsBusinessOrder will be set to true.  No VAT will be calculated when set to true.
+    attr_accessor :is_business_order
 
     # The order lines
     attr_accessor :lines
@@ -48,12 +57,6 @@ module ChannelEngineChannelApiClient
     # The unique customer reference used by the channel
     attr_accessor :channel_customer_no
 
-    # The billing or invoice address
-    attr_accessor :billing_address
-
-    # The shipping address
-    attr_accessor :shipping_address
-
     # Extra data on the order
     attr_accessor :extra_data
 
@@ -61,7 +64,10 @@ module ChannelEngineChannelApiClient
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'billing_address' => :'BillingAddress',
+        :'shipping_address' => :'ShippingAddress',
         :'channel_order_no' => :'ChannelOrderNo',
+        :'is_business_order' => :'IsBusinessOrder',
         :'lines' => :'Lines',
         :'phone' => :'Phone',
         :'email' => :'Email',
@@ -72,8 +78,6 @@ module ChannelEngineChannelApiClient
         :'currency_code' => :'CurrencyCode',
         :'order_date' => :'OrderDate',
         :'channel_customer_no' => :'ChannelCustomerNo',
-        :'billing_address' => :'BillingAddress',
-        :'shipping_address' => :'ShippingAddress',
         :'extra_data' => :'ExtraData'
       }
     end
@@ -81,7 +85,10 @@ module ChannelEngineChannelApiClient
     # Attribute type mapping.
     def self.swagger_types
       {
+        :'billing_address' => :'ChannelAddressRequest',
+        :'shipping_address' => :'ChannelAddressRequest',
         :'channel_order_no' => :'String',
+        :'is_business_order' => :'BOOLEAN',
         :'lines' => :'Array<ChannelOrderLineRequest>',
         :'phone' => :'String',
         :'email' => :'String',
@@ -92,8 +99,6 @@ module ChannelEngineChannelApiClient
         :'currency_code' => :'String',
         :'order_date' => :'DateTime',
         :'channel_customer_no' => :'String',
-        :'billing_address' => :'Address',
-        :'shipping_address' => :'Address',
         :'extra_data' => :'Hash<String, String>'
       }
     end
@@ -106,8 +111,20 @@ module ChannelEngineChannelApiClient
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
+      if attributes.has_key?(:'BillingAddress')
+        self.billing_address = attributes[:'BillingAddress']
+      end
+
+      if attributes.has_key?(:'ShippingAddress')
+        self.shipping_address = attributes[:'ShippingAddress']
+      end
+
       if attributes.has_key?(:'ChannelOrderNo')
         self.channel_order_no = attributes[:'ChannelOrderNo']
+      end
+
+      if attributes.has_key?(:'IsBusinessOrder')
+        self.is_business_order = attributes[:'IsBusinessOrder']
       end
 
       if attributes.has_key?(:'Lines')
@@ -152,14 +169,6 @@ module ChannelEngineChannelApiClient
         self.channel_customer_no = attributes[:'ChannelCustomerNo']
       end
 
-      if attributes.has_key?(:'BillingAddress')
-        self.billing_address = attributes[:'BillingAddress']
-      end
-
-      if attributes.has_key?(:'ShippingAddress')
-        self.shipping_address = attributes[:'ShippingAddress']
-      end
-
       if attributes.has_key?(:'ExtraData')
         if (value = attributes[:'ExtraData']).is_a?(Hash)
           self.extra_data = value
@@ -172,6 +181,14 @@ module ChannelEngineChannelApiClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @billing_address.nil?
+        invalid_properties.push("invalid value for 'billing_address', billing_address cannot be nil.")
+      end
+
+      if @shipping_address.nil?
+        invalid_properties.push("invalid value for 'shipping_address', shipping_address cannot be nil.")
+      end
+
       if @channel_order_no.nil?
         invalid_properties.push("invalid value for 'channel_order_no', channel_order_no cannot be nil.")
       end
@@ -256,20 +273,14 @@ module ChannelEngineChannelApiClient
         invalid_properties.push("invalid value for 'channel_customer_no', the character length must be great than or equal to 0.")
       end
 
-      if @billing_address.nil?
-        invalid_properties.push("invalid value for 'billing_address', billing_address cannot be nil.")
-      end
-
-      if @shipping_address.nil?
-        invalid_properties.push("invalid value for 'shipping_address', shipping_address cannot be nil.")
-      end
-
       return invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @billing_address.nil?
+      return false if @shipping_address.nil?
       return false if @channel_order_no.nil?
       return false if @channel_order_no.to_s.length > 50
       return false if @channel_order_no.to_s.length < 0
@@ -291,8 +302,6 @@ module ChannelEngineChannelApiClient
       return false if @order_date.nil?
       return false if !@channel_customer_no.nil? && @channel_customer_no.to_s.length > 50
       return false if !@channel_customer_no.nil? && @channel_customer_no.to_s.length < 0
-      return false if @billing_address.nil?
-      return false if @shipping_address.nil?
       return true
     end
 
@@ -426,7 +435,10 @@ module ChannelEngineChannelApiClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          billing_address == o.billing_address &&
+          shipping_address == o.shipping_address &&
           channel_order_no == o.channel_order_no &&
+          is_business_order == o.is_business_order &&
           lines == o.lines &&
           phone == o.phone &&
           email == o.email &&
@@ -437,8 +449,6 @@ module ChannelEngineChannelApiClient
           currency_code == o.currency_code &&
           order_date == o.order_date &&
           channel_customer_no == o.channel_customer_no &&
-          billing_address == o.billing_address &&
-          shipping_address == o.shipping_address &&
           extra_data == o.extra_data
     end
 
@@ -451,7 +461,7 @@ module ChannelEngineChannelApiClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [channel_order_no, lines, phone, email, company_registration_no, vat_no, payment_method, shipping_costs_incl_vat, currency_code, order_date, channel_customer_no, billing_address, shipping_address, extra_data].hash
+      [billing_address, shipping_address, channel_order_no, is_business_order, lines, phone, email, company_registration_no, vat_no, payment_method, shipping_costs_incl_vat, currency_code, order_date, channel_customer_no, extra_data].hash
     end
 
     # Builds the object from hash
