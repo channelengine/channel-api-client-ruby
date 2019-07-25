@@ -78,7 +78,12 @@ module ChannelEngineChannelApiClient
     # Get Returns
     # Get all returns created by the merchant. This call is supposed  to be used by channels. Merchants should use the 'GET /v2/returns/merchant'  call.
     # @param [Hash] opts the optional parameters
-    # @option opts [DateTime] :created_since 
+    # @option opts [DateTime] :created_since Deprecated, please use FromDate instead.
+    # @option opts [Array<String>] :statuses Return status(es) to filter on
+    # @option opts [Array<String>] :reasons Return reason(s) to filter on
+    # @option opts [DateTime] :from_date Filter on the creation date, starting from this date. This date is inclusive.
+    # @option opts [DateTime] :to_date Filter on the creation date, until this date. This date is exclusive.
+    # @option opts [Integer] :page The page to filter on. Starts at 1.
     # @return [CollectionOfChannelReturnResponse]
     def return_get_declared_by_merchant(opts = {})
       data, _status_code, _headers = return_get_declared_by_merchant_with_http_info(opts)
@@ -88,11 +93,22 @@ module ChannelEngineChannelApiClient
     # Get Returns
     # Get all returns created by the merchant. This call is supposed  to be used by channels. Merchants should use the &#39;GET /v2/returns/merchant&#39;  call.
     # @param [Hash] opts the optional parameters
-    # @option opts [DateTime] :created_since 
+    # @option opts [DateTime] :created_since Deprecated, please use FromDate instead.
+    # @option opts [Array<String>] :statuses Return status(es) to filter on
+    # @option opts [Array<String>] :reasons Return reason(s) to filter on
+    # @option opts [DateTime] :from_date Filter on the creation date, starting from this date. This date is inclusive.
+    # @option opts [DateTime] :to_date Filter on the creation date, until this date. This date is exclusive.
+    # @option opts [Integer] :page The page to filter on. Starts at 1.
     # @return [Array<(CollectionOfChannelReturnResponse, Fixnum, Hash)>] CollectionOfChannelReturnResponse data, response status code and response headers
     def return_get_declared_by_merchant_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: ReturnApi.return_get_declared_by_merchant ..."
+      end
+      if @api_client.config.client_side_validation && opts[:'statuses'] && !opts[:'statuses'].all?{|item| ['IN_PROGRESS', 'RECEIVED', 'CANCELLED'].include?(item)}
+        fail ArgumentError, 'invalid value for "statuses", must include one of IN_PROGRESS, RECEIVED, CANCELLED'
+      end
+      if @api_client.config.client_side_validation && opts[:'reasons'] && !opts[:'reasons'].all?{|item| ['PRODUCT_DEFECT', 'PRODUCT_UNSATISFACTORY', 'WRONG_PRODUCT', 'TOO_MANY_PRODUCTS', 'REFUSED', 'REFUSED_DAMAGED', 'WRONG_ADDRESS', 'NOT_COLLECTED', 'WRONG_SIZE', 'OTHER'].include?(item)}
+        fail ArgumentError, 'invalid value for "reasons", must include one of PRODUCT_DEFECT, PRODUCT_UNSATISFACTORY, WRONG_PRODUCT, TOO_MANY_PRODUCTS, REFUSED, REFUSED_DAMAGED, WRONG_ADDRESS, NOT_COLLECTED, WRONG_SIZE, OTHER'
       end
       # resource path
       local_var_path = "/v2/returns/channel"
@@ -100,6 +116,11 @@ module ChannelEngineChannelApiClient
       # query parameters
       query_params = {}
       query_params[:'createdSince'] = opts[:'created_since'] if !opts[:'created_since'].nil?
+      query_params[:'statuses'] = @api_client.build_collection_param(opts[:'statuses'], :multi) if !opts[:'statuses'].nil?
+      query_params[:'reasons'] = @api_client.build_collection_param(opts[:'reasons'], :multi) if !opts[:'reasons'].nil?
+      query_params[:'fromDate'] = opts[:'from_date'] if !opts[:'from_date'].nil?
+      query_params[:'toDate'] = opts[:'to_date'] if !opts[:'to_date'].nil?
+      query_params[:'page'] = opts[:'page'] if !opts[:'page'].nil?
 
       # header parameters
       header_params = {}
