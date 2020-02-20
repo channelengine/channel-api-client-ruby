@@ -26,6 +26,9 @@ module ChannelEngineChannelApiClient
     # Optional. Is a business order (default value is false).  If not provided the VAT Number will be checked. If a VAT Number is found, IsBusinessOrder will be set to true.  No VAT will be calculated when set to true.
     attr_accessor :is_business_order
 
+    # Optional. Is the MPN used as key for the product (default value is false).
+    attr_accessor :key_is_merchant_product_no
+
     # The order lines
     attr_accessor :lines
 
@@ -50,7 +53,7 @@ module ChannelEngineChannelApiClient
     # The currency code for the amounts of the order
     attr_accessor :currency_code
 
-    # The date the order was done
+    # The date the order was created at the channel
     attr_accessor :order_date
 
     # The unique customer reference used by the channel
@@ -66,6 +69,7 @@ module ChannelEngineChannelApiClient
         :'shipping_address' => :'ShippingAddress',
         :'channel_order_no' => :'ChannelOrderNo',
         :'is_business_order' => :'IsBusinessOrder',
+        :'key_is_merchant_product_no' => :'KeyIsMerchantProductNo',
         :'lines' => :'Lines',
         :'phone' => :'Phone',
         :'email' => :'Email',
@@ -87,6 +91,7 @@ module ChannelEngineChannelApiClient
         :'shipping_address' => :'ChannelAddressRequest',
         :'channel_order_no' => :'String',
         :'is_business_order' => :'BOOLEAN',
+        :'key_is_merchant_product_no' => :'BOOLEAN',
         :'lines' => :'Array<ChannelOrderLineRequest>',
         :'phone' => :'String',
         :'email' => :'String',
@@ -123,6 +128,10 @@ module ChannelEngineChannelApiClient
 
       if attributes.has_key?(:'IsBusinessOrder')
         self.is_business_order = attributes[:'IsBusinessOrder']
+      end
+
+      if attributes.has_key?(:'KeyIsMerchantProductNo')
+        self.key_is_merchant_product_no = attributes[:'KeyIsMerchantProductNo']
       end
 
       if attributes.has_key?(:'Lines')
@@ -431,6 +440,7 @@ module ChannelEngineChannelApiClient
           shipping_address == o.shipping_address &&
           channel_order_no == o.channel_order_no &&
           is_business_order == o.is_business_order &&
+          key_is_merchant_product_no == o.key_is_merchant_product_no &&
           lines == o.lines &&
           phone == o.phone &&
           email == o.email &&
@@ -453,7 +463,7 @@ module ChannelEngineChannelApiClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [billing_address, shipping_address, channel_order_no, is_business_order, lines, phone, email, company_registration_no, vat_no, payment_method, shipping_costs_incl_vat, currency_code, order_date, channel_customer_no, extra_data].hash
+      [billing_address, shipping_address, channel_order_no, is_business_order, key_is_merchant_product_no, lines, phone, email, company_registration_no, vat_no, payment_method, shipping_costs_incl_vat, currency_code, order_date, channel_customer_no, extra_data].hash
     end
 
     # Builds the object from hash

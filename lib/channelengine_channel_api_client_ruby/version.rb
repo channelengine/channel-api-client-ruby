@@ -11,5 +11,5 @@ Swagger Codegen version: 2.4.8-SNAPSHOT
 =end
 
 module ChannelEngineChannelApiClient
-  VERSION = '2.8.5'
+  VERSION = '2.8.8'
 end

@@ -22,7 +22,12 @@ module ChannelEngineChannelApiClient
     # Get Shipments
     # Gets all shipments created since the supplied date.
     # @param [Hash] opts the optional parameters
-    # @option opts [DateTime] :created_since 
+    # @option opts [DateTime] :created_since Deprecated, please use FromDate instead.
+    # @option opts [Array<String>] :statuses Shipment status(es) to filter on
+    # @option opts [DateTime] :from_date Filter on the creation date, starting from this date. This date is inclusive.
+    # @option opts [DateTime] :to_date Filter on the creation date, until this date. This date is exclusive.
+    # @option opts [Array<String>] :channel_order_nos Filter on the unique references (ids) as used by the channel.
+    # @option opts [Integer] :page The page to filter on. Starts at 1.
     # @return [CollectionOfChannelShipmentResponse]
     def shipment_index(opts = {})
       data, _status_code, _headers = shipment_index_with_http_info(opts)
@@ -32,11 +37,19 @@ module ChannelEngineChannelApiClient
     # Get Shipments
     # Gets all shipments created since the supplied date.
     # @param [Hash] opts the optional parameters
-    # @option opts [DateTime] :created_since 
+    # @option opts [DateTime] :created_since Deprecated, please use FromDate instead.
+    # @option opts [Array<String>] :statuses Shipment status(es) to filter on
+    # @option opts [DateTime] :from_date Filter on the creation date, starting from this date. This date is inclusive.
+    # @option opts [DateTime] :to_date Filter on the creation date, until this date. This date is exclusive.
+    # @option opts [Array<String>] :channel_order_nos Filter on the unique references (ids) as used by the channel.
+    # @option opts [Integer] :page The page to filter on. Starts at 1.
     # @return [Array<(CollectionOfChannelShipmentResponse, Fixnum, Hash)>] CollectionOfChannelShipmentResponse data, response status code and response headers
     def shipment_index_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ShipmentApi.shipment_index ...'
+      end
+      if @api_client.config.client_side_validation && opts[:'statuses'] && !opts[:'statuses'].all? { |item| ['PENDING', 'CLOSED'].include?(item) }
+        fail ArgumentError, 'invalid value for "statuses", must include one of PENDING, CLOSED'
       end
       # resource path
       local_var_path = '/v2/shipments'
@@ -44,6 +57,11 @@ module ChannelEngineChannelApiClient
       # query parameters
       query_params = {}
       query_params[:'createdSince'] = opts[:'created_since'] if !opts[:'created_since'].nil?
+      query_params[:'statuses'] = @api_client.build_collection_param(opts[:'statuses'], :multi) if !opts[:'statuses'].nil?
+      query_params[:'fromDate'] = opts[:'from_date'] if !opts[:'from_date'].nil?
+      query_params[:'toDate'] = opts[:'to_date'] if !opts[:'to_date'].nil?
+      query_params[:'channelOrderNos'] = @api_client.build_collection_param(opts[:'channel_order_nos'], :multi) if !opts[:'channel_order_nos'].nil?
+      query_params[:'page'] = opts[:'page'] if !opts[:'page'].nil?
 
       # header parameters
       header_params = {}

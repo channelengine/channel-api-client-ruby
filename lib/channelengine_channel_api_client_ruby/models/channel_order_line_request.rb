@@ -14,8 +14,11 @@ require 'date'
 
 module ChannelEngineChannelApiClient
   class ChannelOrderLineRequest
-    # The unique order reference used by the channel
+    # The unique product reference used by the channel
     attr_accessor :channel_product_no
+
+    # The unique product reference used by the merchant
+    attr_accessor :merchant_product_no
 
     # The number of items of the product
     attr_accessor :quantity
@@ -61,6 +64,7 @@ module ChannelEngineChannelApiClient
     def self.attribute_map
       {
         :'channel_product_no' => :'ChannelProductNo',
+        :'merchant_product_no' => :'MerchantProductNo',
         :'quantity' => :'Quantity',
         :'cancellation_requested_quantity' => :'CancellationRequestedQuantity',
         :'unit_price_incl_vat' => :'UnitPriceInclVat',
@@ -74,6 +78,7 @@ module ChannelEngineChannelApiClient
     def self.swagger_types
       {
         :'channel_product_no' => :'String',
+        :'merchant_product_no' => :'String',
         :'quantity' => :'Integer',
         :'cancellation_requested_quantity' => :'Integer',
         :'unit_price_incl_vat' => :'Float',
@@ -93,6 +98,10 @@ module ChannelEngineChannelApiClient
 
       if attributes.has_key?(:'ChannelProductNo')
         self.channel_product_no = attributes[:'ChannelProductNo']
+      end
+
+      if attributes.has_key?(:'MerchantProductNo')
+        self.merchant_product_no = attributes[:'MerchantProductNo']
       end
 
       if attributes.has_key?(:'Quantity')
@@ -136,6 +145,14 @@ module ChannelEngineChannelApiClient
         invalid_properties.push('invalid value for "channel_product_no", the character length must be great than or equal to 0.')
       end
 
+      if !@merchant_product_no.nil? && @merchant_product_no.to_s.length > 50
+        invalid_properties.push('invalid value for "merchant_product_no", the character length must be smaller than or equal to 50.')
+      end
+
+      if !@merchant_product_no.nil? && @merchant_product_no.to_s.length < 0
+        invalid_properties.push('invalid value for "merchant_product_no", the character length must be great than or equal to 0.')
+      end
+
       if @quantity.nil?
         invalid_properties.push('invalid value for "quantity", quantity cannot be nil.')
       end
@@ -153,6 +170,8 @@ module ChannelEngineChannelApiClient
       return false if @channel_product_no.nil?
       return false if @channel_product_no.to_s.length > 50
       return false if @channel_product_no.to_s.length < 0
+      return false if !@merchant_product_no.nil? && @merchant_product_no.to_s.length > 50
+      return false if !@merchant_product_no.nil? && @merchant_product_no.to_s.length < 0
       return false if @quantity.nil?
       return false if @unit_price_incl_vat.nil?
       condition_validator = EnumAttributeValidator.new('String', ['NEW', 'NEW_REFURBISHED', 'USED_AS_NEW', 'USED_GOOD', 'USED_REASONABLE', 'USED_MEDIOCRE', 'UNKNOWN', 'USED_VERY_GOOD'])
@@ -178,6 +197,20 @@ module ChannelEngineChannelApiClient
       @channel_product_no = channel_product_no
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] merchant_product_no Value to be assigned
+    def merchant_product_no=(merchant_product_no)
+      if !merchant_product_no.nil? && merchant_product_no.to_s.length > 50
+        fail ArgumentError, 'invalid value for "merchant_product_no", the character length must be smaller than or equal to 50.'
+      end
+
+      if !merchant_product_no.nil? && merchant_product_no.to_s.length < 0
+        fail ArgumentError, 'invalid value for "merchant_product_no", the character length must be great than or equal to 0.'
+      end
+
+      @merchant_product_no = merchant_product_no
+    end
+
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] condition Object to be assigned
     def condition=(condition)
@@ -194,6 +227,7 @@ module ChannelEngineChannelApiClient
       return true if self.equal?(o)
       self.class == o.class &&
           channel_product_no == o.channel_product_no &&
+          merchant_product_no == o.merchant_product_no &&
           quantity == o.quantity &&
           cancellation_requested_quantity == o.cancellation_requested_quantity &&
           unit_price_incl_vat == o.unit_price_incl_vat &&
@@ -211,7 +245,7 @@ module ChannelEngineChannelApiClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [channel_product_no, quantity, cancellation_requested_quantity, unit_price_incl_vat, fee_fixed, fee_rate, condition].hash
+      [channel_product_no, merchant_product_no, quantity, cancellation_requested_quantity, unit_price_incl_vat, fee_fixed, fee_rate, condition].hash
     end
 
     # Builds the object from hash

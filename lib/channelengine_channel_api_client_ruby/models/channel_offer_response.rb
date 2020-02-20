@@ -17,6 +17,8 @@ module ChannelEngineChannelApiClient
     # The unique product reference used by the Channel
     attr_accessor :channel_product_no
 
+    attr_accessor :merchant_product_no
+
     attr_accessor :price
 
     attr_accessor :stock
@@ -25,6 +27,7 @@ module ChannelEngineChannelApiClient
     def self.attribute_map
       {
         :'channel_product_no' => :'ChannelProductNo',
+        :'merchant_product_no' => :'MerchantProductNo',
         :'price' => :'Price',
         :'stock' => :'Stock'
       }
@@ -34,6 +37,7 @@ module ChannelEngineChannelApiClient
     def self.swagger_types
       {
         :'channel_product_no' => :'String',
+        :'merchant_product_no' => :'String',
         :'price' => :'Float',
         :'stock' => :'Integer'
       }
@@ -49,6 +53,10 @@ module ChannelEngineChannelApiClient
 
       if attributes.has_key?(:'ChannelProductNo')
         self.channel_product_no = attributes[:'ChannelProductNo']
+      end
+
+      if attributes.has_key?(:'MerchantProductNo')
+        self.merchant_product_no = attributes[:'MerchantProductNo']
       end
 
       if attributes.has_key?(:'Price')
@@ -79,6 +87,7 @@ module ChannelEngineChannelApiClient
       return true if self.equal?(o)
       self.class == o.class &&
           channel_product_no == o.channel_product_no &&
+          merchant_product_no == o.merchant_product_no &&
           price == o.price &&
           stock == o.stock
     end
@@ -92,7 +101,7 @@ module ChannelEngineChannelApiClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [channel_product_no, price, stock].hash
+      [channel_product_no, merchant_product_no, price, stock].hash
     end
 
     # Builds the object from hash

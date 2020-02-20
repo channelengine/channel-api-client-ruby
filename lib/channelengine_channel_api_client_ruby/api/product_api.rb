@@ -74,9 +74,10 @@ module ChannelEngineChannelApiClient
       return data, status_code, headers
     end
     # Acknowledge Product Offer Changes
-    # After a call to GET 'v2/products/offers' this endpoint should be called with the  ChannelReturnNo of the products that are successfully updated.  Please see 'v2/products/data' and 'v2/products/data' for documentation.
+    # After a call to GET 'v2/products/offers' this endpoint should be called with the  ChannelProductNo of the products that are successfully updated.  Please see 'v2/products/data' and 'v2/products/data' for documentation.  In advanced cases, the MerchantProductNo is used for this.   In that case, bool keyIsMpn should be true.
     # @param changes The channel references of the updated products
     # @param [Hash] opts the optional parameters
+    # @option opts [BOOLEAN] :key_is_mpn If set to true, changes has to be a list of merchant references instead of channel references (default to false)
     # @return [ApiResponse]
     def product_acknowledge_offer_changes(changes, opts = {})
       data, _status_code, _headers = product_acknowledge_offer_changes_with_http_info(changes, opts)
@@ -84,9 +85,10 @@ module ChannelEngineChannelApiClient
     end
 
     # Acknowledge Product Offer Changes
-    # After a call to GET &#39;v2/products/offers&#39; this endpoint should be called with the  ChannelReturnNo of the products that are successfully updated.  Please see &#39;v2/products/data&#39; and &#39;v2/products/data&#39; for documentation.
+    # After a call to GET &#39;v2/products/offers&#39; this endpoint should be called with the  ChannelProductNo of the products that are successfully updated.  Please see &#39;v2/products/data&#39; and &#39;v2/products/data&#39; for documentation.  In advanced cases, the MerchantProductNo is used for this.   In that case, bool keyIsMpn should be true.
     # @param changes The channel references of the updated products
     # @param [Hash] opts the optional parameters
+    # @option opts [BOOLEAN] :key_is_mpn If set to true, changes has to be a list of merchant references instead of channel references
     # @return [Array<(ApiResponse, Fixnum, Hash)>] ApiResponse data, response status code and response headers
     def product_acknowledge_offer_changes_with_http_info(changes, opts = {})
       if @api_client.config.debugging
@@ -101,6 +103,7 @@ module ChannelEngineChannelApiClient
 
       # query parameters
       query_params = {}
+      query_params[:'keyIsMpn'] = opts[:'key_is_mpn'] if !opts[:'key_is_mpn'].nil?
 
       # header parameters
       header_params = {}
