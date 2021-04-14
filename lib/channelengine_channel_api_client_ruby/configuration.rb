@@ -26,7 +26,7 @@ module ChannelEngineChannelApiClient
     # @return [Hash] key: parameter name, value: parameter value (API key)
     #
     # @example parameter name is "api_key", API key is "xxx" (e.g. "api_key=xxx" in query string)
-    #   config.api_key['api_key'] = 'xxx'
+    #   config.api_key['apiKey'] = 'xxx'
     attr_accessor :api_key
 
     # Defines API key prefixes used with API Key authentications.
