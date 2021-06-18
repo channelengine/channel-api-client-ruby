@@ -14,9 +14,10 @@ require 'date'
 require 'time'
 
 module ChannelEngineChannelApiClient
-  class ShipmentStatus
-    PENDING = "PENDING".freeze
-    CLOSED = "CLOSED".freeze
+  class ShipmentLineStatus
+    SHIPPED = "SHIPPED".freeze
+    IN_BACKORDER = "IN_BACKORDER".freeze
+    MANCO = "MANCO".freeze
 
     # Builds the enum from string
     # @param [String] The enum value in the form of the string
@@ -29,8 +30,8 @@ module ChannelEngineChannelApiClient
     # @param [String] The enum value in the form of the string
     # @return [String] The enum value
     def build_from_hash(value)
-      constantValues = ShipmentStatus.constants.select { |c| ShipmentStatus::const_get(c) == value }
-      raise "Invalid ENUM value #{value} for class #ShipmentStatus" if constantValues.empty?
+      constantValues = ShipmentLineStatus.constants.select { |c| ShipmentLineStatus::const_get(c) == value }
+      raise "Invalid ENUM value #{value} for class #ShipmentLineStatus" if constantValues.empty?
       value
     end
   end

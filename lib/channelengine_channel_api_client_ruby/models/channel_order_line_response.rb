@@ -14,7 +14,45 @@ require 'date'
 require 'time'
 
 module ChannelEngineChannelApiClient
-  class ChannelOrderLineRequest
+  class ChannelOrderLineResponse
+    attr_accessor :status
+
+    # Is the order fulfilled by the marketplace (amazon: FBA, bol: LVB, etc.)?.
+    attr_accessor :is_fulfillment_by_marketplace
+
+    # Either the GTIN (EAN, ISBN, UPC etc) provided by the channel, or the the GTIN belonging to the MerchantProductNo in ChannelEngine.
+    attr_accessor :gtin
+
+    # The product description (or title) provided by the channel.
+    attr_accessor :description
+
+    # The total amount of VAT charged over the value of a single unit of the ordered product  (in the shop's base currency calculated using the exchange rate at the time of ordering).
+    attr_accessor :unit_vat
+
+    # The total value of the order line (quantity * unit price) including VAT  (in the shop's base currency calculated using the exchange rate at the time of ordering).
+    attr_accessor :line_total_incl_vat
+
+    # The total amount of VAT charged over the total value of the order line (quantity * unit price)  (in the shop's base currency calculated using the exchange rate at the time of ordering).
+    attr_accessor :line_vat
+
+    # The value of a single unit of the ordered product including VAT  (in the currency in which the order was paid for, see CurrencyCode).
+    attr_accessor :original_unit_price_incl_vat
+
+    # The total amount of VAT charged over the value of a single unit of the ordered product  (in the currency in which the order was paid for, see CurrencyCode).
+    attr_accessor :original_unit_vat
+
+    # The total value of the order line (quantity * unit price) including VAT  (in the currency in which the order was paid for, see CurrencyCode).
+    attr_accessor :original_line_total_incl_vat
+
+    # The total amount of VAT charged over the total value of the order line (quantity * unit price)  (in the currency in which the order was paid for, see CurrencyCode).
+    attr_accessor :original_line_vat
+
+    # A percentage fee that is charged by the Channel for this orderline.  This fee rate is based on the currency of client  This field is optional, send 0 if not applicable.
+    attr_accessor :original_fee_fixed
+
+    # If the product is ordered part of a bundle, this field contains the MerchantProductNo of  the product bundle.
+    attr_accessor :bundle_product_merchant_product_no
+
     # The unique product reference used by the channel.
     attr_accessor :channel_product_no
 
@@ -44,6 +82,19 @@ module ChannelEngineChannelApiClient
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'status' => :'Status',
+        :'is_fulfillment_by_marketplace' => :'IsFulfillmentByMarketplace',
+        :'gtin' => :'Gtin',
+        :'description' => :'Description',
+        :'unit_vat' => :'UnitVat',
+        :'line_total_incl_vat' => :'LineTotalInclVat',
+        :'line_vat' => :'LineVat',
+        :'original_unit_price_incl_vat' => :'OriginalUnitPriceInclVat',
+        :'original_unit_vat' => :'OriginalUnitVat',
+        :'original_line_total_incl_vat' => :'OriginalLineTotalInclVat',
+        :'original_line_vat' => :'OriginalLineVat',
+        :'original_fee_fixed' => :'OriginalFeeFixed',
+        :'bundle_product_merchant_product_no' => :'BundleProductMerchantProductNo',
         :'channel_product_no' => :'ChannelProductNo',
         :'merchant_product_no' => :'MerchantProductNo',
         :'quantity' => :'Quantity',
@@ -64,6 +115,19 @@ module ChannelEngineChannelApiClient
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'status' => :'OrderStatusView',
+        :'is_fulfillment_by_marketplace' => :'Boolean',
+        :'gtin' => :'String',
+        :'description' => :'String',
+        :'unit_vat' => :'Float',
+        :'line_total_incl_vat' => :'Float',
+        :'line_vat' => :'Float',
+        :'original_unit_price_incl_vat' => :'Float',
+        :'original_unit_vat' => :'Float',
+        :'original_line_total_incl_vat' => :'Float',
+        :'original_line_vat' => :'Float',
+        :'original_fee_fixed' => :'Float',
+        :'bundle_product_merchant_product_no' => :'String',
         :'channel_product_no' => :'String',
         :'merchant_product_no' => :'String',
         :'quantity' => :'Integer',
@@ -79,6 +143,16 @@ module ChannelEngineChannelApiClient
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'gtin',
+        :'description',
+        :'unit_vat',
+        :'line_total_incl_vat',
+        :'line_vat',
+        :'original_unit_price_incl_vat',
+        :'original_unit_vat',
+        :'original_line_total_incl_vat',
+        :'original_line_vat',
+        :'bundle_product_merchant_product_no',
         :'merchant_product_no',
         :'expected_delivery_date'
       ])
@@ -88,16 +162,68 @@ module ChannelEngineChannelApiClient
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `ChannelEngineChannelApiClient::ChannelOrderLineRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `ChannelEngineChannelApiClient::ChannelOrderLineResponse` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `ChannelEngineChannelApiClient::ChannelOrderLineRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `ChannelEngineChannelApiClient::ChannelOrderLineResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'status')
+        self.status = attributes[:'status']
+      end
+
+      if attributes.key?(:'is_fulfillment_by_marketplace')
+        self.is_fulfillment_by_marketplace = attributes[:'is_fulfillment_by_marketplace']
+      end
+
+      if attributes.key?(:'gtin')
+        self.gtin = attributes[:'gtin']
+      end
+
+      if attributes.key?(:'description')
+        self.description = attributes[:'description']
+      end
+
+      if attributes.key?(:'unit_vat')
+        self.unit_vat = attributes[:'unit_vat']
+      end
+
+      if attributes.key?(:'line_total_incl_vat')
+        self.line_total_incl_vat = attributes[:'line_total_incl_vat']
+      end
+
+      if attributes.key?(:'line_vat')
+        self.line_vat = attributes[:'line_vat']
+      end
+
+      if attributes.key?(:'original_unit_price_incl_vat')
+        self.original_unit_price_incl_vat = attributes[:'original_unit_price_incl_vat']
+      end
+
+      if attributes.key?(:'original_unit_vat')
+        self.original_unit_vat = attributes[:'original_unit_vat']
+      end
+
+      if attributes.key?(:'original_line_total_incl_vat')
+        self.original_line_total_incl_vat = attributes[:'original_line_total_incl_vat']
+      end
+
+      if attributes.key?(:'original_line_vat')
+        self.original_line_vat = attributes[:'original_line_vat']
+      end
+
+      if attributes.key?(:'original_fee_fixed')
+        self.original_fee_fixed = attributes[:'original_fee_fixed']
+      end
+
+      if attributes.key?(:'bundle_product_merchant_product_no')
+        self.bundle_product_merchant_product_no = attributes[:'bundle_product_merchant_product_no']
+      end
 
       if attributes.key?(:'channel_product_no')
         self.channel_product_no = attributes[:'channel_product_no']
@@ -221,6 +347,19 @@ module ChannelEngineChannelApiClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          status == o.status &&
+          is_fulfillment_by_marketplace == o.is_fulfillment_by_marketplace &&
+          gtin == o.gtin &&
+          description == o.description &&
+          unit_vat == o.unit_vat &&
+          line_total_incl_vat == o.line_total_incl_vat &&
+          line_vat == o.line_vat &&
+          original_unit_price_incl_vat == o.original_unit_price_incl_vat &&
+          original_unit_vat == o.original_unit_vat &&
+          original_line_total_incl_vat == o.original_line_total_incl_vat &&
+          original_line_vat == o.original_line_vat &&
+          original_fee_fixed == o.original_fee_fixed &&
+          bundle_product_merchant_product_no == o.bundle_product_merchant_product_no &&
           channel_product_no == o.channel_product_no &&
           merchant_product_no == o.merchant_product_no &&
           quantity == o.quantity &&
@@ -241,7 +380,7 @@ module ChannelEngineChannelApiClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [channel_product_no, merchant_product_no, quantity, cancellation_requested_quantity, unit_price_incl_vat, fee_fixed, fee_rate, condition, expected_delivery_date].hash
+      [status, is_fulfillment_by_marketplace, gtin, description, unit_vat, line_total_incl_vat, line_vat, original_unit_price_incl_vat, original_unit_vat, original_line_total_incl_vat, original_line_vat, original_fee_fixed, bundle_product_merchant_product_no, channel_product_no, merchant_product_no, quantity, cancellation_requested_quantity, unit_price_incl_vat, fee_fixed, fee_rate, condition, expected_delivery_date].hash
     end
 
     # Builds the object from hash
