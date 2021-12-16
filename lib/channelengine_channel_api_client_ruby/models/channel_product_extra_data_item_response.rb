@@ -136,8 +136,8 @@ module ChannelEngineChannelApiClient
     # Custom attribute writer method with validation
     # @param [Object] value Value to be assigned
     def value=(value)
-      if !value.nil? && value.to_s.length < 1
-        fail ArgumentError, 'invalid value for "value", the character length must be bigger than or equal to 1.'
+      if !value.nil? && value.to_s.length < -1
+        fail ArgumentError, 'invalid value for "value", the character length must be bigger than -1.'
       end
 
       @value = value
