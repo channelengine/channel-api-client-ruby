@@ -43,6 +43,7 @@ lib/channelengine_channel_api_client_ruby/models/data_changes_product_type.rb
 lib/channelengine_channel_api_client_ruby/models/extra_data_type.rb
 lib/channelengine_channel_api_client_ruby/models/gender.rb
 lib/channelengine_channel_api_client_ruby/models/manco_reason.rb
+lib/channelengine_channel_api_client_ruby/models/operation.rb
 lib/channelengine_channel_api_client_ruby/models/order_status_view.rb
 lib/channelengine_channel_api_client_ruby/models/return_reason.rb
 lib/channelengine_channel_api_client_ruby/models/return_status.rb

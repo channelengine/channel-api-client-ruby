@@ -14,37 +14,19 @@ require 'date'
 require 'time'
 
 module ChannelEngineChannelApiClient
-  class CollectionOfChannelCancellationResponse
-    attr_accessor :content
+  class Operation
+    attr_accessor :op
 
-    attr_accessor :count
+    attr_accessor :value
 
-    attr_accessor :total_count
-
-    attr_accessor :items_per_page
-
-    attr_accessor :status_code
-
-    attr_accessor :log_id
-
-    attr_accessor :success
-
-    attr_accessor :message
-
-    attr_accessor :validation_errors
+    attr_accessor :path
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'content' => :'Content',
-        :'count' => :'Count',
-        :'total_count' => :'TotalCount',
-        :'items_per_page' => :'ItemsPerPage',
-        :'status_code' => :'StatusCode',
-        :'log_id' => :'LogId',
-        :'success' => :'Success',
-        :'message' => :'Message',
-        :'validation_errors' => :'ValidationErrors'
+        :'op' => :'op',
+        :'value' => :'value',
+        :'path' => :'path'
       }
     end
 
@@ -56,25 +38,16 @@ module ChannelEngineChannelApiClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'content' => :'Array<ChannelCancellationResponse>',
-        :'count' => :'Integer',
-        :'total_count' => :'Integer',
-        :'items_per_page' => :'Integer',
-        :'status_code' => :'Integer',
-        :'log_id' => :'Integer',
-        :'success' => :'Boolean',
-        :'message' => :'String',
-        :'validation_errors' => :'Hash<String, Array<String>>'
+        :'op' => :'String',
+        :'value' => :'Object',
+        :'path' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'content',
-        :'log_id',
-        :'message',
-        :'validation_errors'
+        :'value',
       ])
     end
 
@@ -82,55 +55,27 @@ module ChannelEngineChannelApiClient
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `ChannelEngineChannelApiClient::CollectionOfChannelCancellationResponse` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `ChannelEngineChannelApiClient::Operation` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `ChannelEngineChannelApiClient::CollectionOfChannelCancellationResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `ChannelEngineChannelApiClient::Operation`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'content')
-        if (value = attributes[:'content']).is_a?(Array)
-          self.content = value
-        end
+      if attributes.key?(:'op')
+        self.op = attributes[:'op']
       end
 
-      if attributes.key?(:'count')
-        self.count = attributes[:'count']
+      if attributes.key?(:'value')
+        self.value = attributes[:'value']
       end
 
-      if attributes.key?(:'total_count')
-        self.total_count = attributes[:'total_count']
-      end
-
-      if attributes.key?(:'items_per_page')
-        self.items_per_page = attributes[:'items_per_page']
-      end
-
-      if attributes.key?(:'status_code')
-        self.status_code = attributes[:'status_code']
-      end
-
-      if attributes.key?(:'log_id')
-        self.log_id = attributes[:'log_id']
-      end
-
-      if attributes.key?(:'success')
-        self.success = attributes[:'success']
-      end
-
-      if attributes.key?(:'message')
-        self.message = attributes[:'message']
-      end
-
-      if attributes.key?(:'validation_errors')
-        if (value = attributes[:'validation_errors']).is_a?(Hash)
-          self.validation_errors = value
-        end
+      if attributes.key?(:'path')
+        self.path = attributes[:'path']
       end
     end
 
@@ -152,15 +97,9 @@ module ChannelEngineChannelApiClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          content == o.content &&
-          count == o.count &&
-          total_count == o.total_count &&
-          items_per_page == o.items_per_page &&
-          status_code == o.status_code &&
-          log_id == o.log_id &&
-          success == o.success &&
-          message == o.message &&
-          validation_errors == o.validation_errors
+          op == o.op &&
+          value == o.value &&
+          path == o.path
     end
 
     # @see the `==` method
@@ -172,7 +111,7 @@ module ChannelEngineChannelApiClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [content, count, total_count, items_per_page, status_code, log_id, success, message, validation_errors].hash
+      [op, value, path].hash
     end
 
     # Builds the object from hash
