@@ -14,17 +14,12 @@ require 'date'
 require 'time'
 
 module ChannelEngineChannelApiClient
-  class ReturnReason
-    PRODUCT_DEFECT = "PRODUCT_DEFECT".freeze
-    PRODUCT_UNSATISFACTORY = "PRODUCT_UNSATISFACTORY".freeze
-    WRONG_PRODUCT = "WRONG_PRODUCT".freeze
-    TOO_MANY_PRODUCTS = "TOO_MANY_PRODUCTS".freeze
-    REFUSED = "REFUSED".freeze
-    REFUSED_DAMAGED = "REFUSED_DAMAGED".freeze
-    WRONG_ADDRESS = "WRONG_ADDRESS".freeze
-    NOT_COLLECTED = "NOT_COLLECTED".freeze
-    WRONG_SIZE = "WRONG_SIZE".freeze
-    OTHER = "OTHER".freeze
+  class ProductType
+    SINGLE = "SINGLE".freeze
+    PARENT = "PARENT".freeze
+    CHILD = "CHILD".freeze
+    GRANDPARENT = "GRANDPARENT".freeze
+    BUNDLE = "BUNDLE".freeze
 
     # Builds the enum from string
     # @param [String] The enum value in the form of the string
@@ -37,8 +32,8 @@ module ChannelEngineChannelApiClient
     # @param [String] The enum value in the form of the string
     # @return [String] The enum value
     def build_from_hash(value)
-      constantValues = ReturnReason.constants.select { |c| ReturnReason::const_get(c) == value }
-      raise "Invalid ENUM value #{value} for class #ReturnReason" if constantValues.empty?
+      constantValues = ProductType.constants.select { |c| ProductType::const_get(c) == value }
+      raise "Invalid ENUM value #{value} for class #ProductType" if constantValues.empty?
       value
     end
   end
