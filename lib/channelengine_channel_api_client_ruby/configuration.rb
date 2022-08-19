@@ -138,8 +138,8 @@ module ChannelEngineChannelApiClient
     attr_accessor :force_ending_format
 
     def initialize
-      @scheme = 'http'
-      @host = 'dev.channelengine.local'
+      @scheme = 'https'
+      @host = 'demo.channelengine.net'
       @base_path = '/api'
       @server_index = 0
       @server_operation_index = {}
@@ -229,7 +229,7 @@ module ChannelEngineChannelApiClient
     def server_settings
       [
         {
-          url: "http://dev.channelengine.local/api",
+          url: "https://demo.channelengine.net/api",
           description: "No description provided",
         }
       ]

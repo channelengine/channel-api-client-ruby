@@ -54,7 +54,6 @@ module ChannelEngineChannelApiClient
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'key',
         :'value',
       ])
     end
@@ -95,11 +94,15 @@ module ChannelEngineChannelApiClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if !@key.nil? && @key.to_s.length > 100
+      if @key.nil?
+        invalid_properties.push('invalid value for "key", key cannot be nil.')
+      end
+
+      if @key.to_s.length > 100
         invalid_properties.push('invalid value for "key", the character length must be smaller than or equal to 100.')
       end
 
-      if !@key.nil? && @key.to_s.length < 0
+      if @key.to_s.length < 0
         invalid_properties.push('invalid value for "key", the character length must be great than or equal to 0.')
       end
 
@@ -109,19 +112,24 @@ module ChannelEngineChannelApiClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@key.nil? && @key.to_s.length > 100
-      return false if !@key.nil? && @key.to_s.length < 0
+      return false if @key.nil?
+      return false if @key.to_s.length > 100
+      return false if @key.to_s.length < 0
       true
     end
 
     # Custom attribute writer method with validation
     # @param [Object] key Value to be assigned
     def key=(key)
-      if !key.nil? && key.to_s.length > 100
+      if key.nil?
+        fail ArgumentError, 'key cannot be nil'
+      end
+
+      if key.to_s.length > 100
         fail ArgumentError, 'invalid value for "key", the character length must be smaller than or equal to 100.'
       end
 
-      if !key.nil? && key.to_s.length < 0
+      if key.to_s.length < 0
         fail ArgumentError, 'invalid value for "key", the character length must be great than or equal to 0.'
       end
 

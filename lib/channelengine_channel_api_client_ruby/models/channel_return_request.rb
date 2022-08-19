@@ -54,6 +54,9 @@ module ChannelEngineChannelApiClient
     # The date at which the return was originally created in the source system (if available).
     attr_accessor :return_date
 
+    # Extra data on the return. Each item must have an unqiue key
+    attr_accessor :extra_data
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -70,7 +73,8 @@ module ChannelEngineChannelApiClient
         :'merchant_comment' => :'MerchantComment',
         :'refund_incl_vat' => :'RefundInclVat',
         :'refund_excl_vat' => :'RefundExclVat',
-        :'return_date' => :'ReturnDate'
+        :'return_date' => :'ReturnDate',
+        :'extra_data' => :'ExtraData'
       }
     end
 
@@ -95,7 +99,8 @@ module ChannelEngineChannelApiClient
         :'merchant_comment' => :'String',
         :'refund_incl_vat' => :'Float',
         :'refund_excl_vat' => :'Float',
-        :'return_date' => :'Time'
+        :'return_date' => :'Time',
+        :'extra_data' => :'Hash<String, String>'
       }
     end
 
@@ -106,7 +111,8 @@ module ChannelEngineChannelApiClient
         :'merchant_order_no',
         :'customer_comment',
         :'merchant_comment',
-        :'return_date'
+        :'return_date',
+        :'extra_data'
       ])
     end
 
@@ -181,6 +187,12 @@ module ChannelEngineChannelApiClient
 
       if attributes.key?(:'return_date')
         self.return_date = attributes[:'return_date']
+      end
+
+      if attributes.key?(:'extra_data')
+        if (value = attributes[:'extra_data']).is_a?(Hash)
+          self.extra_data = value
+        end
       end
     end
 
@@ -322,7 +334,8 @@ module ChannelEngineChannelApiClient
           merchant_comment == o.merchant_comment &&
           refund_incl_vat == o.refund_incl_vat &&
           refund_excl_vat == o.refund_excl_vat &&
-          return_date == o.return_date
+          return_date == o.return_date &&
+          extra_data == o.extra_data
     end
 
     # @see the `==` method
@@ -334,7 +347,7 @@ module ChannelEngineChannelApiClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [channel_order_no, merchant_order_no, channel_reference, key_is_merchant_order_no, key_is_merchant_product_no, lines, status, id, reason, customer_comment, merchant_comment, refund_incl_vat, refund_excl_vat, return_date].hash
+      [channel_order_no, merchant_order_no, channel_reference, key_is_merchant_order_no, key_is_merchant_product_no, lines, status, id, reason, customer_comment, merchant_comment, refund_incl_vat, refund_excl_vat, return_date, extra_data].hash
     end
 
     # Builds the object from hash

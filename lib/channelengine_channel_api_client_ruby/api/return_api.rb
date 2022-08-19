@@ -90,6 +90,7 @@ module ChannelEngineChannelApiClient
     # @option opts [Array<ReturnReason>] :reasons Return reason(s) to filter on.
     # @option opts [Time] :from_date Filter on the creation date, starting from this date. This date is inclusive.
     # @option opts [Time] :to_date Filter on the creation date, until this date. This date is exclusive.
+    # @option opts [Boolean] :is_acknowledged Filters based on acknowledgements
     # @option opts [Integer] :page The page to filter on. Starts at 1.
     # @return [CollectionOfChannelReturnResponse]
     def return_get_declared_by_merchant(opts = {})
@@ -104,6 +105,7 @@ module ChannelEngineChannelApiClient
     # @option opts [Array<ReturnReason>] :reasons Return reason(s) to filter on.
     # @option opts [Time] :from_date Filter on the creation date, starting from this date. This date is inclusive.
     # @option opts [Time] :to_date Filter on the creation date, until this date. This date is exclusive.
+    # @option opts [Boolean] :is_acknowledged Filters based on acknowledgements
     # @option opts [Integer] :page The page to filter on. Starts at 1.
     # @return [Array<(CollectionOfChannelReturnResponse, Integer, Hash)>] CollectionOfChannelReturnResponse data, response status code and response headers
     def return_get_declared_by_merchant_with_http_info(opts = {})
@@ -119,6 +121,7 @@ module ChannelEngineChannelApiClient
       query_params[:'reasons'] = @api_client.build_collection_param(opts[:'reasons'], :multi) if !opts[:'reasons'].nil?
       query_params[:'fromDate'] = opts[:'from_date'] if !opts[:'from_date'].nil?
       query_params[:'toDate'] = opts[:'to_date'] if !opts[:'to_date'].nil?
+      query_params[:'isAcknowledged'] = opts[:'is_acknowledged'] if !opts[:'is_acknowledged'].nil?
       query_params[:'page'] = opts[:'page'] if !opts[:'page'].nil?
 
       # header parameters

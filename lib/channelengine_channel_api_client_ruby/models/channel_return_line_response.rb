@@ -34,6 +34,9 @@ module ChannelEngineChannelApiClient
     # Number of items of the product in this return.
     attr_accessor :quantity
 
+    # Extra data on the returnline. Each item must have an unqiue key
+    attr_accessor :extra_data
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -43,7 +46,8 @@ module ChannelEngineChannelApiClient
         :'rejected_quantity' => :'RejectedQuantity',
         :'order_line' => :'OrderLine',
         :'shipment_status' => :'ShipmentStatus',
-        :'quantity' => :'Quantity'
+        :'quantity' => :'Quantity',
+        :'extra_data' => :'ExtraData'
       }
     end
 
@@ -61,7 +65,8 @@ module ChannelEngineChannelApiClient
         :'rejected_quantity' => :'Integer',
         :'order_line' => :'ChannelOrderLineResponse',
         :'shipment_status' => :'ShipmentLineStatus',
-        :'quantity' => :'Integer'
+        :'quantity' => :'Integer',
+        :'extra_data' => :'Hash<String, String>'
       }
     end
 
@@ -71,6 +76,7 @@ module ChannelEngineChannelApiClient
         :'merchant_product_no',
         :'accepted_quantity',
         :'rejected_quantity',
+        :'extra_data'
       ])
     end
 
@@ -115,6 +121,12 @@ module ChannelEngineChannelApiClient
 
       if attributes.key?(:'quantity')
         self.quantity = attributes[:'quantity']
+      end
+
+      if attributes.key?(:'extra_data')
+        if (value = attributes[:'extra_data']).is_a?(Hash)
+          self.extra_data = value
+        end
       end
     end
 
@@ -171,7 +183,8 @@ module ChannelEngineChannelApiClient
           rejected_quantity == o.rejected_quantity &&
           order_line == o.order_line &&
           shipment_status == o.shipment_status &&
-          quantity == o.quantity
+          quantity == o.quantity &&
+          extra_data == o.extra_data
     end
 
     # @see the `==` method
@@ -183,7 +196,7 @@ module ChannelEngineChannelApiClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [channel_product_no, merchant_product_no, accepted_quantity, rejected_quantity, order_line, shipment_status, quantity].hash
+      [channel_product_no, merchant_product_no, accepted_quantity, rejected_quantity, order_line, shipment_status, quantity, extra_data].hash
     end
 
     # Builds the object from hash
